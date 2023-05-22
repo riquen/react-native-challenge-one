@@ -11,33 +11,6 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
-    newTask: {
-        position: "absolute",
-        bottom: '-15%',
-        flexDirection: 'row',
-        gap: 4
-    },
-    input: {
-        backgroundColor: '#262626',
-        borderColor: '#0d0d0d',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderRadius: 6,
-        padding: 16,
-        fontSize: 16,
-        fontFamily: 'Inter_400Regular',
-        marginLeft: 24,
-        flex: 1
-    },
-    button: {
-        width: 52,
-        height: 52,
-        borderRadius: 6,
-        backgroundColor: '#1e6f9f',
-        alignItems: "center",
-        justifyContent: "center",
-        marginRight: 24
-    },
     info: {
         marginTop: 55,
         flexDirection: 'row',

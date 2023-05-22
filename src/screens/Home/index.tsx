@@ -1,24 +1,15 @@
-import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import Logo from '../../assets/svg/logo.svg'
-import Plus from '../../assets/svg/plus.svg'
 import Clipboard from '../../assets/svg/clipboard.svg'
 import { styles } from "./styles";
+import { NewTask } from "../../components/NewTask";
 
 export function Home() {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Logo width={110} height={32} />
-                <View style={styles.newTask}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Adicione uma nova tarefa"
-                        placeholderTextColor='#808080'
-                    />
-                    <TouchableOpacity style={styles.button}>
-                        <Plus width={16} height={16} />
-                    </TouchableOpacity>
-                </View>
+                <NewTask />
             </View>
             <View style={styles.info}>
                 <View style={styles.created}>
