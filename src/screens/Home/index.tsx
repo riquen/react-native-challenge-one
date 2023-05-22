@@ -3,6 +3,7 @@ import Logo from '../../assets/svg/logo.svg'
 import Clipboard from '../../assets/svg/clipboard.svg'
 import { styles } from "./styles";
 import { NewTask } from "../../components/NewTask";
+import { Task } from "../../components/Task";
 
 export function Home() {
     return (
@@ -26,10 +27,10 @@ export function Home() {
                 </View>
             </View>
             <FlatList
-                data={[]}
+                data={['Integer urna interdum massa libero auct neque turpis turpis semper.']}
                 keyExtractor={item => item}
                 renderItem={({ item }) => (
-                    <Text>{item}</Text>
+                    <Task task={item} />
                 )}
                 showsVerticalScrollIndicator={false}
                 ListEmptyComponent={() => (

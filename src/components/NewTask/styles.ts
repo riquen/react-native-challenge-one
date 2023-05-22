@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: '#262626',
-        borderColor: '#0d0d0d',
         borderWidth: 1,
         borderStyle: 'solid',
+        borderColor: '#0d0d0d',
         borderRadius: 6,
         padding: 16,
         fontSize: 16,
@@ -21,9 +21,9 @@ export const styles = StyleSheet.create({
         color: '#fff'
     },
     focusedInput: {
-        borderColor: '#5E60CE',
         borderWidth: 1,
         borderStyle: 'solid',
+        borderColor: '#5E60CE',
         color: '#fff'
     },
     button: {

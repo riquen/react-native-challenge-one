@@ -16,7 +16,8 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginHorizontal: 24
+        marginHorizontal: 24,
+        marginBottom: 20
     },
     created: {
         alignItems: 'center',
@@ -52,14 +53,13 @@ export const styles = StyleSheet.create({
         color: '#d9d9d9'
     },
     listEmpty: {
-        marginTop: 20,
         marginHorizontal: 24,
         justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 48,
         paddingHorizontal: 20,
-        borderTopColor: '#333333',
-        borderTopWidth: 1
+        borderTopWidth: 1,
+        borderTopColor: '#333333'
     },
     listEmptyTitle: {
         marginTop: 16,
