@@ -12,6 +12,7 @@ export function Home() {
     const [completed, setCompleted] = useState<number>(0)
     const [tasks, setTasks] = useState<string[]>([])
     const [task, setTask] = useState<string>('')
+    const [isChecked, setIsChecked] = useState<boolean[]>([])
 
     function handleTaskAdd() {
         if (tasks.includes(task)) {
@@ -19,10 +20,11 @@ export function Home() {
         }
         setCreated(prevState => prevState + 1)
         setTasks(prevState => [ ...prevState, task ])
+        setIsChecked(prevState => [...prevState, false])
         setTask('')
     }
 
-    function handleTaskRemove(task :string) {
+    function handleTaskRemove(index: number) {
         Alert.alert('Deletar', 'Deseja deletar a tarefa?', [
             {
                 text: 'Não'
@@ -31,10 +33,23 @@ export function Home() {
                 text: 'Sim',
                 onPress: () => {
                     setCreated(prevState => prevState - 1)
-                    setTasks(prevState => prevState.filter(item => item !== task))
+                    setTasks(prevState => prevState.filter((item, i) => i !== index))
+                    setIsChecked(prevState => {
+                        const updatedState = [...prevState]
+                        updatedState.splice(index, 1)
+                        return updatedState
+                    })
                 }
             }
         ])
+    }
+
+    function handleCheckboxChange(index: number, value: boolean) {
+        setIsChecked(prevState => {
+            const updatedState = [...prevState]
+            updatedState[index] = value
+            return updatedState
+        })
     }
 
     return (
@@ -50,12 +65,14 @@ export function Home() {
             <Info created={created} completed={completed} />
             <FlatList
                 data={tasks}
-                keyExtractor={item => item}
-                renderItem={({ item }) => (
+                keyExtractor={(_, index) => String(index)}
+                renderItem={({ item, index }) => (
                     <Task
                         key={item}
+                        isChecked={isChecked[index]}
+                        onValueChange={(value) => handleCheckboxChange(index, value)}
                         task={item}
-                        onRemove={() => handleTaskRemove(item)}
+                        onRemove={() => handleTaskRemove(index)}
                     />
                 )}
                 showsVerticalScrollIndicator={false}
