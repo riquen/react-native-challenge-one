@@ -22,14 +22,25 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.6,
         gap: 10
     },
+    checkedContainer: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#262626',
+    },
     checkbox: {
-        borderColor: '#4ea8de',
         borderRadius: 999,
         width: 20,
         height: 20
     },
+    checked: {
+        opacity: 0.9
+    },
     task: {
         color: '#fff',
         flexShrink: 1
+    },
+    checkedTask: {
+        textDecorationLine: 'line-through',
+        color: '#808080'
     }
 })
