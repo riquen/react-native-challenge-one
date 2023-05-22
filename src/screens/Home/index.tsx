@@ -4,7 +4,7 @@ import Clipboard from '../../assets/svg/clipboard.svg'
 import { styles } from "./styles";
 import { NewTask } from "../../components/NewTask";
 import { Task } from "../../components/Task";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Info } from "../../components/Info";
 
 export function Home() {
@@ -13,6 +13,10 @@ export function Home() {
     const [tasks, setTasks] = useState<string[]>([])
     const [task, setTask] = useState<string>('')
     const [isChecked, setIsChecked] = useState<boolean[]>([])
+
+    useEffect(() => {
+        setCompleted(isChecked.filter(item => item === true).length);
+      }, [isChecked])
 
     function handleTaskAdd() {
         if (tasks.includes(task)) {
