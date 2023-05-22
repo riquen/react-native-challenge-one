@@ -1,36 +1,62 @@
-import { FlatList, Text, View } from "react-native";
+import { Alert, FlatList, Text, View } from "react-native";
 import Logo from '../../assets/svg/logo.svg'
 import Clipboard from '../../assets/svg/clipboard.svg'
 import { styles } from "./styles";
 import { NewTask } from "../../components/NewTask";
 import { Task } from "../../components/Task";
+import { useState } from "react";
+import { Info } from "../../components/Info";
 
 export function Home() {
+    const [created, setCreated] = useState<number>(0)
+    const [completed, setCompleted] = useState<number>(0)
+    const [tasks, setTasks] = useState<string[]>([])
+    const [task, setTask] = useState<string>('')
+
+    function handleTaskAdd() {
+        if (tasks.includes(task)) {
+            return Alert.alert('Tarefa já cadastrada', 'Adicione uma tarefa diferente')
+        }
+        setCreated(prevState => prevState + 1)
+        setTasks(prevState => [ ...prevState, task ])
+        setTask('')
+    }
+
+    function handleTaskRemove(task :string) {
+        Alert.alert('Deletar', 'Deseja deletar a tarefa?', [
+            {
+                text: 'Não'
+            },
+            {
+                text: 'Sim',
+                onPress: () => {
+                    setCreated(prevState => prevState - 1)
+                    setTasks(prevState => prevState.filter(item => item !== task))
+                }
+            }
+        ])
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Logo width={110} height={32} />
-                <NewTask />
+                <NewTask
+                    onChangeText={setTask}
+                    value={task}
+                    onAdd={handleTaskAdd}
+                />
             </View>
-            <View style={styles.info}>
-                <View style={styles.created}>
-                    <Text style={styles.createdText}>Criadas</Text>
-                    <View style={styles.counter}>
-                        <Text style={styles.counterText}>0</Text>
-                    </View>
-                </View>
-                <View style={styles.done}>
-                    <Text style={styles.doneText}>Concluídas</Text>
-                    <View style={styles.counter}>
-                        <Text style={styles.counterText}>0</Text>
-                    </View>
-                </View>
-            </View>
+            <Info created={created} completed={completed} />
             <FlatList
-                data={['Integer urna interdum massa libero auct neque turpis turpis semper.']}
+                data={tasks}
                 keyExtractor={item => item}
                 renderItem={({ item }) => (
-                    <Task task={item} />
+                    <Task
+                        key={item}
+                        task={item}
+                        onRemove={() => handleTaskRemove(item)}
+                    />
                 )}
                 showsVerticalScrollIndicator={false}
                 ListEmptyComponent={() => (

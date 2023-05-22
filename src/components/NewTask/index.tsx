@@ -3,7 +3,13 @@ import Plus from '../../assets/svg/plus.svg'
 import { styles } from "./styles";
 import { useState } from "react";
 
-export function NewTask() {
+type NewTaskProps = {
+    onChangeText: (text: string) => void
+    value: string
+    onAdd: () => void
+}
+
+export function NewTask({ onChangeText, value, onAdd }: NewTaskProps) {
     const [isFocused, setIsFocused] = useState<boolean>(false)
 
     const handleFocus = () => {
@@ -23,8 +29,10 @@ export function NewTask() {
                 keyboardAppearance="dark"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                onChangeText={onChangeText}
+                value={value}
             />
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={onAdd}>
                 <Plus width={16} height={16} />
             </TouchableOpacity>
         </View>
